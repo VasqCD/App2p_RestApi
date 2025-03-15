@@ -1,7 +1,10 @@
 package com.example.app2p_restapi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,8 +41,23 @@ public class ListPlaceHolder extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_list_place_holder);
 
+        setTitle("Lista de Posts");
+
         listView = findViewById(R.id.listplace);
         postsList = new ArrayList<>();
+
+        // Configurar el listener de clic para los elementos de la lista
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Posts selectedPost = postsList.get(position);
+
+                // Crear intent para abrir la actividad de detalle
+                Intent intent = new Intent(ListPlaceHolder.this, PostDetailActivity.class);
+                intent.putExtra("post_id", selectedPost.getId());
+                startActivity(intent);
+            }
+        });
 
         // Obtener datos de la API
         fetchData();

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">App2P_RestApi</string>
+    <string name="post_detail_title">Detalle del Post</string>
+    <string name="back_button">Volver</string>
+    <string name="loading">Cargando...</string>
+    <string name="error_loading">Error al cargar los datos</string>
 </resources>

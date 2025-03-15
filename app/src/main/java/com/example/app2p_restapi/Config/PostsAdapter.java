@@ -1,6 +1,7 @@
 package com.example.app2p_restapi.Config;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.app2p_restapi.PostDetailActivity;
 import com.example.app2p_restapi.R;
 
 import java.util.List;
@@ -44,6 +46,19 @@ public class PostsAdapter extends ArrayAdapter<Posts> {
             txtId.setText("ID: " + post.getId() + " (Usuario: " + post.getUserId() + ")");
             txtTitle.setText(post.getTitle());
             txtBody.setText(post.getBody());
+
+            // Agregar el listener de clic al elemento de la lista
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Crear un intent para abrir la actividad de detalle
+                    Intent intent = new Intent(context, PostDetailActivity.class);
+                    // Pasar el ID del post como extra
+                    intent.putExtra("post_id", post.getId());
+                    // Iniciar la actividad
+                    context.startActivity(intent);
+                }
+            });
         }
 
         return view;
