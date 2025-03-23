@@ -1,9 +1,9 @@
 # App2p_RestApi
-<img src="https://github.com/user-attachments/assets/d39313b9-b742-4ee0-9503-e1d30eb103c1" width="300" alt="WhatsApp Image 2025-03-22 at 9 12 18 PM">
+<img src="https://github.com/user-attachments/assets/d39313b9-b742-4ee0-9503-e1d30eb103c1" width="200" alt="Lista">
 
-<img src="https://github.com/user-attachments/assets/e16ba704-f399-43a7-8ea3-5e30a2cfcc84" width="300" alt="WhatsApp Image 2025-03-22 at 9 12 18 PM (1)">
+<img src="https://github.com/user-attachments/assets/e16ba704-f399-43a7-8ea3-5e30a2cfcc84" width="200" alt="Buscando elemento por id">
 
-<img src="https://github.com/user-attachments/assets/6467c846-8fec-43ab-9806-79f059dcb70a" width="300" alt="WhatsApp Image 2025-03-22 at 9 12 18 PM (2)">
+<img src="https://github.com/user-attachments/assets/6467c846-8fec-43ab-9806-79f059dcb70a" width="200" alt="Detalles de un elemento de la lista">
 
 ## Descripción
 App2p_RestApi es una aplicación Android desarrollada en Java utilizando Android Studio y Gradle. La aplicación está diseñada para interactuar con una API REST y utiliza la biblioteca Volley para manejar las solicitudes de red.
