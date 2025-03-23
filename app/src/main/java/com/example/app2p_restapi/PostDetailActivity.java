@@ -2,6 +2,8 @@ package com.example.app2p_restapi;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,15 @@ public class PostDetailActivity extends AppCompatActivity {
         txtUserId = findViewById(R.id.txtDetailUserId);
         txtTitle = findViewById(R.id.txtDetailTitle);
         txtBody = findViewById(R.id.txtDetailBody);
+
+        // Boton de regreso
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // Obtener el ID del post de los extras
         int postId = getIntent().getIntExtra("post_id", -1);

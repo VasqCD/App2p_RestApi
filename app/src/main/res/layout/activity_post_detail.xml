@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:paddingTop="40dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
     tools:context=".PostDetailActivity">
 
     <androidx.cardview.widget.CardView
@@ -26,38 +29,38 @@
                 android:id="@+id/txtDetailId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#555555"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="#555555"
                 tools:text="ID: 1" />
 
             <TextView
                 android:id="@+id/txtDetailUserId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textStyle="bold"
                 android:layout_marginTop="4dp"
                 android:textColor="#555555"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 tools:text="Usuario ID: 1" />
 
             <TextView
                 android:id="@+id/txtDetailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_marginTop="16dp"
                 android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 tools:text="Título del Post" />
 
             <TextView
                 android:id="@+id/txtDetailBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_marginTop="16dp"
                 android:textColor="#333333"
+                android:textSize="16sp"
                 tools:text="Cuerpo del post con texto completo..." />
 
         </LinearLayout>
@@ -68,7 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Volver"
-        android:onClick="onBackPressed" />
+        android:text="Volver" />
 
 </LinearLayout>

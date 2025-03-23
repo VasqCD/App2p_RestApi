@@ -2,9 +2,13 @@ package com.example.app2p_restapi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,8 +36,11 @@ public class ListPlaceHolder extends AppCompatActivity {
 
     private RequestQueue mRequestQueue;
     private List<Posts> postsList;
+    private List<Posts> filteredPostsList;
     private ListView listView;
     private PostsAdapter adapter;
+    private EditText searchEditText;
+    private Button btnSalvar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +50,29 @@ public class ListPlaceHolder extends AppCompatActivity {
 
         setTitle("Lista de Posts");
 
+        // Inicializar vistas
         listView = findViewById(R.id.listplace);
-        postsList = new ArrayList<>();
+        searchEditText = findViewById(R.id.searchEditText);
+        btnSalvar = findViewById(R.id.btnSalvar);
 
-        // Configurar el listener de clic para los elementos de la lista
+        postsList = new ArrayList<>();
+        filteredPostsList = new ArrayList<>();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Posts selectedPost = postsList.get(position);
+                Posts selectedPost = (Posts) parent.getItemAtPosition(position);
 
-                // Crear intent para abrir la actividad de detalle
                 Intent intent = new Intent(ListPlaceHolder.this, PostDetailActivity.class);
                 intent.putExtra("post_id", selectedPost.getId());
                 startActivity(intent);
+            }
+        });
+
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterPosts();
             }
         });
 
@@ -77,7 +94,7 @@ public class ListPlaceHolder extends AppCompatActivity {
                             // parsear el JSON
                             JSONArray jsonArray = new JSONArray(response);
 
-                            // lipiar lista
+                            // limpiar lista
                             postsList.clear();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -92,7 +109,8 @@ public class ListPlaceHolder extends AppCompatActivity {
                                 postsList.add(post);
                             }
 
-                            adapter = new PostsAdapter(ListPlaceHolder.this, postsList);
+                            filteredPostsList.addAll(postsList);
+                            adapter = new PostsAdapter(ListPlaceHolder.this, filteredPostsList);
                             listView.setAdapter(adapter);
 
                         } catch (JSONException e) {
@@ -110,7 +128,47 @@ public class ListPlaceHolder extends AppCompatActivity {
                 }
         );
 
-        // Agregar la solicitud a la cola
         requestQueue.add(stringRequest);
+    }
+
+    private void filterPosts() {
+        String searchText = searchEditText.getText().toString().toLowerCase().trim();
+
+        filteredPostsList.clear();
+
+        if (searchText.isEmpty()) {
+            filteredPostsList.addAll(postsList);
+        } else {
+            boolean isNumber = false;
+            int searchId = -1;
+
+            try {
+                searchId = Integer.parseInt(searchText);
+                isNumber = true;
+            } catch (NumberFormatException e) {
+                isNumber = false;
+            }
+
+            for (Posts post : postsList) {
+                // Buscar por ID (si el texto es un número)
+                if (isNumber && (post.getId() == searchId || post.getUserId() == searchId)) {
+                    filteredPostsList.add(post);
+                }
+                // Buscar por título o cuerpo
+                else if (post.getTitle().toLowerCase().contains(searchText) ||
+                        post.getBody().toLowerCase().contains(searchText)) {
+                    filteredPostsList.add(post);
+                }
+            }
+        }
+
+        if (filteredPostsList.isEmpty()) {
+            // Si no hay resultados, mostrar un mensaje y recargar la lista completa
+            Toast.makeText(this, "No se encontraron resultados. Mostrando lista completa.", Toast.LENGTH_SHORT).show();
+            filteredPostsList.addAll(postsList); // Recargar con todos los posts
+        }
+
+        adapter = new PostsAdapter(ListPlaceHolder.this, filteredPostsList);
+        listView.setAdapter(adapter);
     }
 }

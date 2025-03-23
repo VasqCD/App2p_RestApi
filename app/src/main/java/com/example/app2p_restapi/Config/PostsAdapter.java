@@ -36,7 +36,7 @@ public class PostsAdapter extends ArrayAdapter<Posts> {
             view = inflater.inflate(R.layout.posts_item, null);
         }
 
-        Posts post = postsList.get(position);
+        Posts post = getItem(position);
 
         if (post != null) {
             TextView txtId = view.findViewById(R.id.txtId);
@@ -51,11 +51,8 @@ public class PostsAdapter extends ArrayAdapter<Posts> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Crear un intent para abrir la actividad de detalle
                     Intent intent = new Intent(context, PostDetailActivity.class);
-                    // Pasar el ID del post como extra
                     intent.putExtra("post_id", post.getId());
-                    // Iniciar la actividad
                     context.startActivity(intent);
                 }
             });
